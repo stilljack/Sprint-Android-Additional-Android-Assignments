@@ -36,5 +36,17 @@ private Runnable mUpdateTimeTask = new Runnable() {
            mHandler.postDelayed(this, 100);
        }
     };
+private Handler mHandler = new Handler();
+//Make sure you update Seekbar on UI thread
+MainActivity.this.runOnUiThread(new Runnable() {
 
+    @Override
+    public void run() {
+        if(mMediaPlayer != null){
+            int mCurrentPosition = mMediaPlayer.getCurrentPosition() / 1000;
+            mSeekBar.setProgress(mCurrentPosition);
+        }
+        mHandler.postDelayed(this, 1000);
+    }
+});
  */

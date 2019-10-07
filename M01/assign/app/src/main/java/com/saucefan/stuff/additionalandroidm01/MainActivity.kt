@@ -1,17 +1,26 @@
 package com.saucefan.stuff.additionalandroidm01
 
+import android.graphics.Color
 import android.graphics.drawable.Animatable
 import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.SeekBar
+import androidx.work.OneTimeWorkRequest
+import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.saucefan.stuff.additionalandroidm01.work.ProgressWorker
 import kotlinx.android.synthetic.main.activity_main.*
+import java.time.Duration
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var mp:MediaPlayer
+    val handler = Handler()
     private val workManager = WorkManager.getInstance(application)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,14 +37,16 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
 
 
-        video_view.setVideoURI(Uri.parse("android.resource://" + packageName + "/" + R.raw.samplevideo))
+
+
+
+        video_view.setVideoURI(Uri.parse("android.resource://" + packageName + "/" + R.raw.live_views_of_starman))
 
         video_view.setOnPreparedListener {
             mp=it
             play_pause_button.isEnabled = true
-            mp.let {
-                video_seek_bar.max = mp.duration
-            }
+            video_seek_bar.max = (mp.duration/100)
+
 
         }
 
@@ -56,8 +67,7 @@ class MainActivity : AppCompatActivity() {
                 pbtnAnim.start()
             }
         }
-
-
+      startProgressRefreshTimer(1000L)
     }
 
     override fun onStop() {
@@ -66,11 +76,54 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
     }
 
+
+    fun startProgressRefreshTimer(delayM: Long) {
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                video_seek_bar.setBackgroundColor(randomHSVColor())
+                val cur=mp.currentPosition/100
+                video_seek_bar.progress=(cur)
+
+
+                handler.postDelayed(this, delayM)
+            }
+        }, delayM)
+
+    }
+    fun randomHSVColor(): Int {
+        val mRandom = Random
+        val hue = mRandom.nextInt(361)
+        val saturation = 1.0f
+        val value = 1.0f
+        val alpha = 255
+        return Color.HSVToColor(alpha, floatArrayOf(hue.toFloat(), saturation, value))
+    }
+    object RepeatHelper {
+        fun repeatDelayed(delay: Long, todo: () -> Unit) {
+            val handler = Handler()
+            handler.postDelayed(object : Runnable {
+                override fun run() {
+                    todo()
+                    handler.postDelayed(this, delay)
+                }
+            }, delay)
+        }
+    }
     fun seekbears() {
         video_seek_bar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if(fromUser) {
+                    val cur = progress * 100
+                    val curMp = mp.currentPosition / 100
 
-                video_view.seekTo(progress)
+                    if (cur >= (curMp + 200) || cur <= (curMp - 200)) {
+                        mp.seekTo(cur)
+                    }
+                }
+
+
+
+
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
