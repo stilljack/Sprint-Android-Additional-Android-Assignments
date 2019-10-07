@@ -16,6 +16,9 @@ import com.google.android.exoplayer2.upstream.RawResourceDataSource
 import com.google.android.exoplayer2.util.Util
 import kotlinx.android.synthetic.main.activity_exo_player.*
 import kotlinx.android.synthetic.main.activity_main.*
+import com.google.android.exoplayer2.ExoPlayerFactory
+import com.google.android.exoplayer2.SimpleExoPlayer
+
 
 /*
 This activity demonstrates how to use ExoPlayer to play a video from local file system and
@@ -29,7 +32,7 @@ also from the internet.
 class ExoPlayerActivity : AppCompatActivity() {
 
     //TODO 4: Declare the variables needed. A simpleExoPlayer instance.
-
+lateinit var videoExoPlayer:SimpleExoPlayer
     //TODO 5: Notice the url we will be using to streaming mp4 over the internet.
     val URL = "https://archive.org/download/Popeye_forPresident/Popeye_forPresident_512kb.mp4"
 
@@ -43,31 +46,56 @@ class ExoPlayerActivity : AppCompatActivity() {
         //TODO 7: Create a function to setup video player from file system
         //This function can be switched out with the setupVideoPlayerWithURL to stream the video
         //from the internet.
-        setupVideoPlayerFromFileSystem()
-        video_view.setOnCompletionListener {
-            video_view.start()
-        }
-        //TODO 9: Setup clicklisteners for play and pause buttons
+      //  setupVideoPlayerFromFileSystem()
+setupVideoPlayerWithURL()
 
+        videoExoPlayer.playWhenReady = true
+        //TODO 9: Setup clicklisteners for play and pause buttons
+play.setOnClickListener {
+    videoExoPlayer.playWhenReady =true
+
+}
+        pause.setOnClickListener {
+            videoExoPlayer.playWhenReady=false
+
+        }
         //TODO 9a: Set the player for the PlayerView
+
+        playerView.player=videoExoPlayer
     }
 
     fun setupVideoPlayerFromFileSystem() {
+        videoExoPlayer.prepare(createRawMediaSource(R.raw.samplevideo))
     }
 
     //TODO 8: Create a function to setup video player with url to stream video through internet.
     fun setupVideoPlayerWithURL() {
+
+videoExoPlayer.prepare(createUrlMediaSource(URL))
+
     }
 
     fun createVideoPlayer() {
         // Need a track selector
+        val trackSelector=DefaultTrackSelector()
         // Need a load control
+        val loadControl = DefaultLoadControl()
         // Need a renderers factory
+        val renderersFactory = DefaultRenderersFactory(this)
 
+
+    /*    val dataSourceFactory = DefaultDataSourceFactory(
+            this,
+            Util.getUserAgent(this, "MediaProgramming")
+        )*/
+
+
+
+// Prepare the player with the source.
         // Set up the ExoPlayer
-
+        videoExoPlayer = ExoPlayerFactory.newSimpleInstance(this,renderersFactory,trackSelector,loadControl)
         // Set up the scaling mode to crop and fit the video to the screen
-
+        videoExoPlayer.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
     }
 
     //TODO 12: Do not forget to stop the player when the user navigates away from the screen
