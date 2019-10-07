@@ -15,6 +15,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.upstream.RawResourceDataSource
 import com.google.android.exoplayer2.util.Util
 import kotlinx.android.synthetic.main.activity_exo_player.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 /*
 This activity demonstrates how to use ExoPlayer to play a video from local file system and
@@ -43,7 +44,9 @@ class ExoPlayerActivity : AppCompatActivity() {
         //This function can be switched out with the setupVideoPlayerWithURL to stream the video
         //from the internet.
         setupVideoPlayerFromFileSystem()
-
+        video_view.setOnCompletionListener {
+            video_view.start()
+        }
         //TODO 9: Setup clicklisteners for play and pause buttons
 
         //TODO 9a: Set the player for the PlayerView
