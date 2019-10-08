@@ -20,7 +20,7 @@ class KotlinView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr)
 {
     val paint=Paint()
-  
+
 }
 
 
