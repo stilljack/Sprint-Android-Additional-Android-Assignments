@@ -13,8 +13,10 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.saucefan.stuff.additionalandroidm01.work.ProgressWorker
+import com.saucefan.stuff.additionalandroidm01.work.cb
 import kotlinx.android.synthetic.main.activity_main.*
 import java.time.Duration
+import java.util.jar.Attributes
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +37,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
 
 
 
@@ -68,6 +69,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
       startProgressRefreshTimer(1000L)
+
+
+
     }
 
     override fun onStop() {
