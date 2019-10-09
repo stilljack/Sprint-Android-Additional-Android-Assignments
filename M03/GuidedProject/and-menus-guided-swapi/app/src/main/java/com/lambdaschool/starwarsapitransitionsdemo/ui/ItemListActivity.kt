@@ -39,7 +39,7 @@ class ItemListActivity : AppCompatActivity() {
     private var swApiObjects: ArrayList<SwApiObject>? = null
     private var viewAdapter: SimpleItemRecyclerViewAdapter? = null
 
-    private var drawerLayout: DrawerLayout? = null
+   lateinit var drawerLayout: DrawerLayout
 
     private var currentType: Int = 0
 
@@ -53,7 +53,7 @@ class ItemListActivity : AppCompatActivity() {
         toolbar.title = title
 
         // TODO 3: get handle to drawer layout and bind to toolbar toggle
-    val drawerLayout = findViewById(R.id.drawers) as DrawerLayout
+    val drawerLayout = findViewById<DrawerLayout>(R.id.drawers)
         val toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open_drawer,R.string.close_drawer)
         drawerLayout.addDrawerListener(toggle)
 
