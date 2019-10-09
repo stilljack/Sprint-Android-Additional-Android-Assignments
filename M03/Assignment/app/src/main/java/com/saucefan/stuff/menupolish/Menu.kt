@@ -32,7 +32,7 @@ class Menu : AppCompatActivity() {
 
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-
+    
 
     }
 
