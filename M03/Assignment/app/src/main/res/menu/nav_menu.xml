@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item android:title="whatThisDo">-->
+        <group android:checkableBehavior="single">
+            <item
+                android:checkable="true"
+                android:icon="@mipmap/ic_launcher"
+                android:id="@+id/nav_menu"
+                android:title="Menu" />
+
+            <item
+                android:checkable="true"
+                android:icon="@mipmap/ic_launcher_round"
+                android:id="@+id/nav_difficulty"
+                android:title="Diffculty" />
+            <item
+                android:checkable="true"
+                android:icon="@drawable/ic_transform_black_24dp"
+                android:id="@+id/nav_gfx_swap"
+                android:title="Graphics Swap" />
+        </group>
+    <!--</item>-->
+</menu>
