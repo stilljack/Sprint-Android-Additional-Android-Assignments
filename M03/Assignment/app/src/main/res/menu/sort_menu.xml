@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="swap nightmode"
+        android:id="@+id/menu_sort"
+        android:icon="@android:drawable/ic_input_delete"/>
+    <item
+        android:title="Toggle score display"
+        android:id="@+id/menu_show_toast"
+        android:icon="@android:drawable/ic_dialog_info"/>
+</menu>

@@ -53,9 +53,10 @@ class ItemListActivity : AppCompatActivity() {
         toolbar.title = title
 
         // TODO 3: get handle to drawer layout and bind to toolbar toggle
-    val drawerLayout = findViewById<DrawerLayout>(R.id.drawers)
-        val toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open_drawer,R.string.close_drawer)
+     drawerLayout = findViewById<DrawerLayout>(R.id.drawers)
+        val toggle = ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_drawer,R.string.close_drawer)
         drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
 
 
 
@@ -85,7 +86,8 @@ class ItemListActivity : AppCompatActivity() {
                     R.id.nav_category_planets ->getData(TYPE_PEOPLE)
                 R.id.nav_category_starships ->getData(TYPE_PEOPLE)
             }
-drawerLayout.closeDrawers()
+            drawerLayout.closeDrawers()
+            drawerLayout.invalidate()
             true
         }
 
@@ -201,30 +203,25 @@ drawerLayout.closeDrawers()
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
-   when (item?.itemId) {
-       R.id.menu_sort -> {
-           swApiObjects?.sortWith(object: Comparator<SwApiObject> {
-               override fun compare(o1: SwApiObject?, o2: SwApiObject?): Int {
-
-                   return if (o1 === null || o2 == null) {
-                       0
-                   } else {
-                       return compare(o1,o2)
-                   }
-               }
-           }
-           )
-           viewAdapter?.notifyDataSetChanged()
-
-
-       }
-       R.id.menu_show_toast -> {}
-
-   }
-
+        when (item?.itemId) {
+            R.id.menu_sort -> {
+                swApiObjects?.let {
+                    it.sortWith(Comparator { o1, o2 ->
+                        if (o1 == null || o2 == null) {
+                            0
+                        } else {
+                            o1.name.compareTo(o2.name)
+                         //   SwApiObject.compareNames(o1, o2)
+                        }
+                    })
+                    viewAdapter?.notifyDataSetChanged()
+                }
+            }
+            R.id.menu_show_toast -> {
+                Toast.makeText(this, "This is a toast", Toast.LENGTH_SHORT).show()
+            }
+        }
         return super.onOptionsItemSelected(item)
-
-
     }
 
     class SimpleItemRecyclerViewAdapter
