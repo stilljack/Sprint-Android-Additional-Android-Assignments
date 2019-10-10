@@ -39,5 +39,17 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback {
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        for (i in 0 until 20){
+            val lat = 34.0 - i as Double
+            val lng = 151.00
+            makeArbMarker(lat,lng)
+
+        }
+    }
+
+    fun makeArbMarker(x:Double,y:Double) {
+        val chords = LatLng(x,y)
+        mMap.addMarker(MarkerOptions().position(chords).title("Marker in Sydney"))
+
     }
 }

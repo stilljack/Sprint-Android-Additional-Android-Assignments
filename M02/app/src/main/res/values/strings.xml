@@ -2,4 +2,6 @@
     <string name="app_name">mapassign</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_maps2">Map</string>
+    <string name="bullheck">bar</string>
+    <string name="bullhockey">foo</string>
 </resources>

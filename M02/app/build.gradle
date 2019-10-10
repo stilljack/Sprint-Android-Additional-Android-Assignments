@@ -30,6 +30,8 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
+
+
     // App dependencies
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
     implementation "androidx.annotation:annotation:1.1.0"
@@ -37,7 +39,7 @@ dependencies {
     implementation "androidx.core:core-ktx:1.1.0"
     implementation "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
     implementation "com.google.android.material:material:${versions.androidx}"
-
+    implementation "com.mikepenz:materialdrawer:7.0.0-rc07"
     // TODO S9M2-01: Add Google Play Services
     // Google Play Services
     implementation "com.google.android.gms:play-services-maps:17.0.0"
