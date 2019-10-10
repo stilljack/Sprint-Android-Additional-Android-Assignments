@@ -6,6 +6,10 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlin.random.Random
 
 
+
+
+
+
 class MapDraw(var mMap: GoogleMap) {
     val r = Random
     // Add a marker in Sydney and move the camera
@@ -62,7 +66,7 @@ class MapDraw(var mMap: GoogleMap) {
                 xe=x1
             }
           //here we call our pixel
-
+            xAxisDomLine(x,xe,)
 
         }
 
@@ -72,9 +76,44 @@ class MapDraw(var mMap: GoogleMap) {
 
 
 
-    fun xAxisDomLine(x,y) {
+    fun xAxisDomLine(
+        x:Double,
+        y:Double,
+                     xe:Double,
+                     px:Double,
+        dx1:Double,
+                     dy1:Double,
+        dx:Double,
+        dy:Double) {
+        makeArbMarker(x, y) // Draw first pixel
+        var i = 0.0
+        var x = x
+        var y=y
+        var px=px
+        while (x < xe) {
+            x++
 
-        
+            // Deal with octants...
+
+            if (px < 0) {
+                px = px + 2 * dy1
+            } else {
+                if (dx < 0 && dy < 0 || dx > 0 && dy > 0) {
+                    y = y + 1
+                } else {
+                    y = y - 1
+                }
+                px = px + 2 * (dy1 - dx1)
+            }
+
+            // Draw pixel from line span at
+            // currently rasterized position
+            makeArbMarker(x, y)
+            i++
+        }
+
+
+
     }
     //draws a cross
     fun example() {
