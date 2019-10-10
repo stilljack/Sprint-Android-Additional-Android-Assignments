@@ -8,14 +8,11 @@ import kotlin.random.Random
 
 class MapDraw(var mMap: GoogleMap) {
     val r = Random
-    // Add a marker in Sydney and move the camera
-    val sydney = LatLng(-34.0, 151.0)
 
 
 //Bresenham’s Algorithm
 
     fun bresenhamAlgo(x1: Double, y1: Double, x2: Double, y2: Double) {
-
         //iterators
         var x: Double
         var y: Double
@@ -95,7 +92,6 @@ class MapDraw(var mMap: GoogleMap) {
             x++
 
             // Deal with octants...
-
             if (px < 0) {
                 px = px + 2 * dy1
             } else {
@@ -106,13 +102,10 @@ class MapDraw(var mMap: GoogleMap) {
                 }
                 px = (px + 2 * (dy1 - dx1))
             }
-
             // Draw pixel from line span at
             // currently rasterized position
             makeArbMarker(x, y)
-
         }
-
     }
 
     fun yAxisDomLine(

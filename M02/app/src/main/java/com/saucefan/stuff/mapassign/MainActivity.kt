@@ -104,20 +104,66 @@ override fun onMapReady(googleMap: GoogleMap) {
     val r = Random
     // Add a marker in Sydney and move the camera
    // val sydney = LatLng(-34.0, 151.0)
-    val mapDraw=MapDraw(mMap)
-    var x=34.0
-    var y =151.0
-    var x2= 40.0
-    var y2=161.0
 
+
+    // lat +/-90
+    // lon +/-180
+
+
+
+    //F in next three
+    val mapDraw=MapDraw(mMap)
+    var x=55.0
+    var y =161.0
+    var x2= 55.0
+    var y2=180.0
+
+    // top -
    mapDraw.bresenhamAlgo(x,y,x2,y2)
 
-    x=50.0
-    y =145.0
-    x2= 40.0
-    y2=100.0
+    x=48.0
+    y =161.0
+    x2= 48.0
+    y2=180.0
 
+    // middle - in f
     mapDraw.bresenhamAlgo(x,y,x2,y2)
+
+    x=34.0
+    y =161.0
+    x2= 55.0
+    y2=161.0
+
+    // | in f
+    mapDraw.bresenhamAlgo(x,y,x2,y2)
+
+
+    //F in next three
+    x=55.0
+   y =161.0
+   x2= 55.0
+  y2=180.0
+
+    // top -
+    mapDraw.bresenhamAlgo(x,y,x2,y2)
+
+    x=48.0
+    y =161.0
+    x2= 48.0
+    y2=180.0
+
+    // middle - in f
+    mapDraw.bresenhamAlgo(x,y,x2,y2)
+
+    x=34.0
+    y =161.0
+    x2= 55.0
+    y2=161.0
+
+    // | in f
+    mapDraw.bresenhamAlgo(x,y,x2,y2)
+
+
 
 
 }
