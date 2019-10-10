@@ -105,7 +105,20 @@ override fun onMapReady(googleMap: GoogleMap) {
     // Add a marker in Sydney and move the camera
    // val sydney = LatLng(-34.0, 151.0)
     val mapDraw=MapDraw(mMap)
-    mapDraw.example()
+    var x=34.0
+    var y =151.0
+    var x2= 40.0
+    var y2=161.0
+
+   mapDraw.bresenhamAlgo(x,y,x2,y2)
+
+    x=50.0
+    y =145.0
+    x2= 40.0
+    y2=100.0
+
+    mapDraw.bresenhamAlgo(x,y,x2,y2)
+
 
 }
 

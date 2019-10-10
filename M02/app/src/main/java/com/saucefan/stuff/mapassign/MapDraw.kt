@@ -27,7 +27,7 @@ class MapDraw(var mMap: GoogleMap) {
         var py: Double
         var xe: Double
         var ye: Double
-        var i: Double
+
 
         //deltas, difference of end points on both axises
         dx = x2 - x1
@@ -64,7 +64,15 @@ class MapDraw(var mMap: GoogleMap) {
             //here we call our pixel maker
             xAxisDomLine(x, y, xe, px, dx1, dy1, dx, dy)
         }
-
+        else {
+            // Line is drawn bottom to top
+            if (dy >= 0) {
+                x = x1; y = y1; ye = y2
+            } else { // Line is drawn top to bottom
+                x = x2; y = y2; ye = y1
+            }
+            yAxisDomLine(x,y,ye,py,dx1,dy1,dx,dy)
+        }
 
     }
 
@@ -110,11 +118,7 @@ class MapDraw(var mMap: GoogleMap) {
     fun yAxisDomLine(
         x: Double,
         y: Double,
-        x2: Double,
-        y2: Double,
         ye: Double,
-        x1: Double,
-        y1: Double,
         py:Double,
         dx1: Double,
         dy1: Double,
@@ -123,15 +127,7 @@ class MapDraw(var mMap: GoogleMap) {
     ) {
 var x =x
         var y = y
-        var ye =ye
         var py =py
-
-        // Line is drawn bottom to top
-        if (dy >= 0) {
-            x = x1; y = y1; ye = y2
-        } else { // Line is drawn top to bottom
-            x = x2; y = y2; ye = y1
-        }
 
         makeArbMarker(x, y); // Draw first pixel
 
