@@ -100,24 +100,18 @@ val contxt = this
  */
 override fun onMapReady(googleMap: GoogleMap) {
     mMap = googleMap
+
     val r = Random
     // Add a marker in Sydney and move the camera
-    val sydney = LatLng(-34.0, 151.0)
-    mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-    mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-    for (i in -25 until 50){
-        val lat = 34.0 - (i.toDouble() + r.nextDouble(0.0, 1.9) - r.nextDouble(0.0, 1.9))
-        val lng = 151.00
-        makeArbMarker(lat,lng)
+   // val sydney = LatLng(-34.0, 151.0)
+    val mapDraw=MapDraw(mMap)
+    mapDraw.example()
 
-    }
-    for (i in -35 until 35){
-        val lat = 50.0
-        val lng = 151.00- (i.toDouble() + r.nextDouble(0.0, 1.9) - r.nextDouble(0.0, 1.9))
-        makeArbMarker(lat,lng)
-
-    }
 }
+
+
+
+
 
 fun makeArbMarker(x:Double,y:Double) {
     val chords = LatLng(x,y)
